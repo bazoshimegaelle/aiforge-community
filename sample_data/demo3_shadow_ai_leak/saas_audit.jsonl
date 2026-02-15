@@ -1,0 +1,2 @@
+{"ts":"2026-01-10T16:23:15Z","user":"bob","ip":"192.0.2.44","device":"desktop-9","action":"upload","session_id":"S3","object":"customers_2025.csv"}
+{"ts":"2026-01-10T16:24:40Z","user":"bob","ip":"192.0.2.44","device":"desktop-9","action":"share","session_id":"S3","object":"customers_2025.csv","target":"external_email"}

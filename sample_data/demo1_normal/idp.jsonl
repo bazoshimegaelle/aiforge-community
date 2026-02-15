@@ -1,0 +1,2 @@
+{"ts":"2026-01-10T14:00:00Z","user":"alice","ip":"203.0.113.9","device":"laptop-22","action":"login_success","session_id":"S1"}
+{"ts":"2026-01-10T14:00:08Z","user":"alice","ip":"203.0.113.9","device":"laptop-22","action":"mfa_success","session_id":"S1"}

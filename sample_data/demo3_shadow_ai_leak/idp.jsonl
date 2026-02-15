@@ -1,0 +1,2 @@
+{"ts":"2026-01-10T16:20:00Z","user":"bob","ip":"192.0.2.44","device":"desktop-9","action":"login_success","session_id":"S3"}
+{"ts":"2026-01-10T16:20:12Z","user":"bob","ip":"192.0.2.44","device":"desktop-9","action":"mfa_success","session_id":"S3"}

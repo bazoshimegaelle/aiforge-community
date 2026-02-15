@@ -1,0 +1,2 @@
+{"ts":"2026-01-10T14:01:30Z","user":"alice","ip":"203.0.113.9","device":"laptop-22","action":"process_start","session_id":"S1","process":"chrome.exe"}
+{"ts":"2026-01-10T14:03:55Z","user":"alice","ip":"203.0.113.9","device":"laptop-22","action":"browser_download","session_id":"S1","object":"chat_export.json"}

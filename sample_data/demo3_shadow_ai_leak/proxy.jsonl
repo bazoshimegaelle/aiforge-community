@@ -1,0 +1,3 @@
+{"ts":"2026-01-10T16:22:00Z","user":"bob","ip":"192.0.2.44","device":"desktop-9","action":"http_get","session_id":"S3","url":"https://shadow-ai.example/"}
+{"ts":"2026-01-10T16:23:05Z","user":"bob","ip":"192.0.2.44","device":"desktop-9","action":"http_post","session_id":"S3","url":"https://shadow-ai.example/upload"}
+{"ts":"2026-01-10T16:24:30Z","user":"bob","ip":"192.0.2.44","device":"desktop-9","action":"http_post","session_id":"S3","url":"https://shadow-ai.example/share"}
