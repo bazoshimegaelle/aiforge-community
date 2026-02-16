@@ -17,141 +17,132 @@ Outputs:
 ## Requirements
 - Python 3.10+ (stdlib only)
 
+## Installation
+Clone the repository:
+
+git clone https://github.com/bazoshimegaelle/aiforge-community.git
+cd aiforge-community
+
 ## Quick start (Windows)
-From the repo root:
+Run a demo scenario:
 
-```bat
-python aiforge.py --help
+python aiforge.py --data sample_data\demo2_takeover --out reports_demo2 --eval --eval_csv eval_demo2.csv
 
-## Design Philosophy
 
-AIFORGE is intentionally:
 
-Small
+## FRSC Overview 
 
-Inspectable
+FRCS (Forensic Reconstruction Confidence Score) ranges from 0–100.
+It quantifies how strongly observable evidence supports an incident reconstruction when the AI system itself is opaque.
 
-Reproducible
+FRCS aggregates four signals:
 
-Vendor-neutral
+- Identity (0–30): login, MFA, session continuity
 
-Non-commercial
+- Network (0–25): proxy/DNS corroboration
 
-It is not a SIEM replacement and does not inspect model internals.
-It formalizes disciplined log-based reconstruction under black-box constraints.
+- Data movement (0–25): upload, download, external share
 
-## Reproducible Evaluation (CACM Artifact)
+- Endpoint (0–20): process and device evidence
 
-Run all included scenarios:
+Enhanced mode subtracts 8 points for multiple IPs and 8 points for multiple devices. These penalties reflect ambiguity, not guilt.
 
+Scores ≥80 indicate high-confidence reconstruction. Scores <40 indicate insufficient evidence.
+
+The scoring logic is deterministic and fully inspectable in aiforge.py
+ 
+ ## Interpreatation
+ | Score  | Meaning                        |
+| ------ | ------------------------------ |
+| 80–100 | High-confidence reconstruction |
+| 60–79  | Moderate confidence            |
+| 40–59  | Weak corroboration             |
+| <40    | Insufficient evidence          |
+ 
+ FRCS is:
+
+- Deterministic
+
+- Transparent
+
+- Reproducible
+
+The full logic is implemented in aiforge.py.
+
+# Reproducible Evaluation
 python aiforge.py --data sample_data\demo1_normal --out reports_demo1 --eval --eval_csv eval_demo1.csv
 python aiforge.py --data sample_data\demo2_takeover --out reports_demo2 --eval --eval_csv eval_demo2.csv
 python aiforge.py --data sample_data\demo3_shadow_ai_leak --out reports_demo3 --eval --eval_csv eval_demo3.csv
 
-
 Each scenario produces:
 
-Baseline FRCS
+- Baseline FRCS
 
-Enhanced FRCS (with penalties)
+- Enhanced FRCS (with penalties)
 
-Structured findings
+- Structured findings
 
-Per-case timeline
+- Per-case timeline
 
-Evaluation CSV
+- Evaluation CSV
 
-##  FRCS Overview
+All datasets are synthetic and safe for publication.
 
-The Forensic Reconstruction Confidence Score (FRCS) is a bounded score (0–100) that quantifies the evidentiary strength of an incident reconstruction when AI model internals are unavailable.
+# Example Output (Evaluation Table)
+EVALUATION (Baseline vs Enhanced)
+case                  events  baseline_frcs  enhanced_frcs  delta  findings_count  incident_class
+-----------------------------------------------------------------------------------------------
+user=alice|session=S2  6      85             69             -16    4            potential_data_exposure
 
-FRCS aggregates four independently observable evidence planes:
+## Limitations
 
-1️⃣ Identity Certainty (0–30)
+AIFORGE:
 
-Measures authentication strength and session continuity.
+- Does not inspect AI model prompts
 
-Contributing signals include:
+- Does not analyze model weights
 
-Successful login event
+- Does not perform semantic prompt injection detection
 
-MFA completion
+- Depends on completeness and quality of log sources
 
-Stable session identifier
+It reconstructs observable behavior only.
 
-Consistent user attribution
+## Intended Use
 
-Higher values indicate strong post-authentication confidence.
+AIFORGE is suitable for:
 
-2️⃣ Network Corroboration (0–25)
+- Educational use
 
-Measures whether identity activity is supported by network telemetry.
+- Research artifacts
 
-Contributing signals include:
+- Security demonstrations
 
-Consistent source IP
+- Log-correlation prototyping
 
-Proxy/DNS corroboration
+- Reproducible incident reconstruction experiments
 
-SaaS domain access matching session timeline
+It is not production-hardened.
 
-Corroboration reduces ambiguity in attribution.
+## License
 
-3️⃣ Data Movement (0–25)
+This project is licensed under the GNU Affero General Public License v3.0.
 
-Measures observable file interaction or content transfer.
+See LICENSE file for details.
 
-Contributing signals include:
+## Citation
 
-SaaS upload/download events
+If referencing this artifact:
 
-External sharing events
+Shime, G.Y. 2026. AIFORGE (Community Edition): Operational AI Forensics Without Model Access. GitHub repository. https://github.com/bazoshimegaelle/aiforge-community
 
-Network egress to AI/SaaS endpoints
+## Version
 
-This component indicates whether sensitive data may have been exposed.
+Current release: v1.0.0
 
-4️⃣ Endpoint Confirmation (0–20)
+## Author
 
-Measures device-level validation of activity.
-
-Contributing signals include:
-
-Browser process execution
-
-Clipboard interaction
-
-Device identifier consistency
-
-Endpoint evidence increases reconstruction fidelity.
-
-Enhanced Mode (Penalty Model)
-
-Enhanced FRCS introduces structured penalties to reflect ambiguity:
-
-−8 points for multiple distinct IP addresses within a session
-
-−8 points for multiple device identifiers within a session
-
-These penalties reflect attribution uncertainty rather than malicious intent.
-
-Interpretation Guidelines
-
-FRCS Range	                         Interpretation
-80–100	                           High-confidence reconstruction
-60–79	                           Moderate confidence,review recommended
-40–59	                           Weak corroboration
-<40	                               Insufficient evidence
-
-FRCS is designed to be:
-
-Transparent
-
-Deterministic
-
-Explainable
-
-Reproducible
-
-The scoring logic is fully implemented in aiforge.py and can be independently inspected or modified.
+Gaelle Yeo Shime
+Independent Researcher
+Maryland, USA
 
