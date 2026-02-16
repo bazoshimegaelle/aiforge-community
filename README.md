@@ -100,7 +100,7 @@ Each scenario produces:
 All datasets are synthetic and safe for publication.
 
 # Example Output (Evaluation Table)
-EVALUATION (Baseline vs Enhanced)
+
 EVALUATION (Baseline vs Enhanced)
 case                   events        baseline_frcs  enhanced_frcs  delta         findings_count  incident_class
 ---------------------  ------------  -------------  -------------  ------------  --------------  -------------------------
