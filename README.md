@@ -78,10 +78,11 @@ Three synthetic scenarios are included:
 
 - demo3_shadow_ai_leak —> potential data exposure
 
+Run:
 python aiforge.py --data sample_data\demo1_normal --out reports_demo1 --eval --eval_csv eval_demo1.csv
 python aiforge.py --data sample_data\demo2_takeover --out reports_demo2 --eval --eval_csv eval_demo2.csv
 python aiforge.py --data sample_data\demo3_shadow_ai_leak --out reports_demo3 --eval --eval_csv eval_demo3.csv
-Run:
+
 
 
 Each scenario produces:
