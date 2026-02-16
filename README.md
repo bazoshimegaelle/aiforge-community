@@ -44,7 +44,7 @@ FRCS aggregates four signals:
 
 - Endpoint (0–20): process and device evidence
 
-Enhanced mode subtracts 8 points for multiple IPs and 8 points for multiple devices. These penalties reflect ambiguity, not guilt.
+Enhanced mode subtracts -8 points for multiple IPs and -6 points for multiple devices. These penalties reflect ambiguity, not guilt.
 
 Scores ≥80 indicate high-confidence reconstruction. Scores <40 indicate insufficient evidence.
 
@@ -72,16 +72,17 @@ The full logic is implemented in aiforge.py.
 
 Three synthetic scenarios are included:
 
-- demo1_normal — benign activity
+- demo1_normal —> benign activity
 
-- demo2_takeover — session anomaly
+- demo2_takeover —> session anomaly
 
-- demo3_shadow_ai_leak — potential data exposure
+- demo3_shadow_ai_leak —> potential data exposure
 
-Run:
 python aiforge.py --data sample_data\demo1_normal --out reports_demo1 --eval --eval_csv eval_demo1.csv
 python aiforge.py --data sample_data\demo2_takeover --out reports_demo2 --eval --eval_csv eval_demo2.csv
 python aiforge.py --data sample_data\demo3_shadow_ai_leak --out reports_demo3 --eval --eval_csv eval_demo3.csv
+Run:
+
 
 Each scenario produces:
 
@@ -99,9 +100,12 @@ All datasets are synthetic and safe for publication.
 
 # Example Output (Evaluation Table)
 EVALUATION (Baseline vs Enhanced)
-case                  events  baseline_frcs  enhanced_frcs  delta  findings_count  incident_class
------------------------------------------------------------------------------------------------
-user=alice|session=S2  6      85             69             -16    4            potential_data_exposure
+EVALUATION (Baseline vs Enhanced)
+case                   events        baseline_frcs  enhanced_frcs  delta         findings_count  incident_class
+---------------------  ------------  -------------  -------------  ------------  --------------  -------------------------
+user=alice|session=S2  10            80             72             -8            3               possible_exfil_or_malware
+user=alice|session=S1  1             10             10             0             1               needs_analysis
+
 
 ## Limitations
 
