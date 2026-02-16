@@ -29,7 +29,6 @@ Run a demo scenario:
 python aiforge.py --data sample_data\demo2_takeover --out reports_demo2 --eval --eval_csv eval_demo2.csv
 
 
-
 ## FRSC Overview 
 
 FRCS (Forensic Reconstruction Confidence Score) ranges from 0–100.
@@ -70,6 +69,16 @@ The scoring logic is deterministic and fully inspectable in aiforge.py
 The full logic is implemented in aiforge.py.
 
 # Reproducible Evaluation
+
+Three synthetic scenarios are included:
+
+- demo1_normal — benign activity
+
+- demo2_takeover — session anomaly
+
+- demo3_shadow_ai_leak — potential data exposure
+
+Run:
 python aiforge.py --data sample_data\demo1_normal --out reports_demo1 --eval --eval_csv eval_demo1.csv
 python aiforge.py --data sample_data\demo2_takeover --out reports_demo2 --eval --eval_csv eval_demo2.csv
 python aiforge.py --data sample_data\demo3_shadow_ai_leak --out reports_demo3 --eval --eval_csv eval_demo3.csv
@@ -106,7 +115,7 @@ AIFORGE:
 
 - Depends on completeness and quality of log sources
 
-It reconstructs observable behavior only.
+It reconstructs observable behavior only, and  it demonstrates structured reconstruction under black-box constraints.
 
 ## Intended Use
 
